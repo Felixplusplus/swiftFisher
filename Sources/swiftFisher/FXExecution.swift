@@ -11,6 +11,7 @@ typealias FX_string_handle = (String)->Void
 
 class FXExecution {
     
+    @discardableResult
     class func execute(_ args:String..., handle:FX_string_handle?) -> Int {
         
         let task = Process()
