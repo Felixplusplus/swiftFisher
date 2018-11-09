@@ -3,8 +3,9 @@ import Rainbow
 
 
 let launchpath = FileManager.default.currentDirectoryPath
+print("======================================================")
 print("FX: script launch from \(launchpath)".yellow.underline)
-
+print("======================================================")
 
 let gitStatusOption = FXCommandOption(name: "-g", usage: "to print all git status in your folder") { (s) in
     
