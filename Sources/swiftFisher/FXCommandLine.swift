@@ -32,6 +32,14 @@ class FXCommandLine {
         s_args.removeFirst()
         s_args.append("-")
         var msg:String = ""
+        if s_args.count<=1 {
+            
+            print("Usage:")
+            options.forEach { (op) in
+                print(op.name+" "+op.usage)
+            }
+            return
+        }
         s_args.forEach { (s) in
             if msg.count>0 && msg.isFXCommandOptionTitle(){
                 if s.isFXCommandOptionTitle(){
