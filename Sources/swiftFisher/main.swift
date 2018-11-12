@@ -3,9 +3,9 @@ import Rainbow
 
 
 let launchpath = FileManager.default.currentDirectoryPath
-print("======================================================")
+print("===================================================================")
 print("FX: script launch from \(launchpath)".yellow.underline)
-print("======================================================")
+print("===================================================================")
 
 let gitStatusOption = FXCommandOption(name: "-g", usage: "to print all git status in your folder") { (s) in
     
@@ -34,9 +34,10 @@ let gitBranchOption = FXCommandOption(name: "-gb", usage: "to print all git bran
         return FXDirectory.isGitPath(path: p)
     }
     allGitPath.forEach { (p) in
-        print(p.red)
+        let name:String = String(p.split(separator: "/").last ?? "NoNameFolder")
         FileManager.default.changeCurrentDirectoryPath(p)
-        print(FXExecution.executeString("git","branch")?.white ?? "no branch".green)
+        let bc = FXExecution.executeString("git","rev-parse","--abbrev-ref","HEAD")?.white ?? "no branch".green
+        print(name.red+" : "+bc)
     }
     
 }
