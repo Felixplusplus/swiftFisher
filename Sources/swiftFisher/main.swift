@@ -6,9 +6,9 @@ import Rainbow
 
 
 let launchpath = FileManager.default.currentDirectoryPath
-print("===================================================================")
+print("======================================================")
 print("FX: script launch from \(launchpath)".yellow.underline)
-print("===================================================================")
+print("======================================================")
 
 
 let cmd = FXCommandLine()

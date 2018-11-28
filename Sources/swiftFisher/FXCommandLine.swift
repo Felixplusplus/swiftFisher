@@ -33,30 +33,42 @@ class FXCommandLine {
         s_args.append("-")
         var msg:String = ""
         if s_args.count<=1 {
-            
-            print("Usage:")
-            options.forEach { (op) in
-                print(op.name+" "+op.usage)
-            }
+            printUsage()
             return
         }
+        var count = 0
         s_args.forEach { (s) in
             if msg.count>0 && msg.isFXCommandOptionTitle(){
                 if s.isFXCommandOptionTitle(){
-                    parseOption(title: msg, value: nil)
+                    if parseOption(title: msg, value: nil) {
+                        count += 1
+                    }
                 }else {
-                    parseOption(title: msg, value: s)
+                    if parseOption(title: msg, value: s) {
+                        count += 1
+                    }
                 }
             }
             msg = s
         }
+        if count < 1 {
+            printUsage()
+        }
     }
     
-    func parseOption(title:String ,value:String?) -> Void {
+    func printUsage() {
+        print("Usage:")
+        options.forEach { (op) in
+            print(op.name+" "+op.usage)
+        }
+    }
+    
+    func parseOption(title:String ,value:String?) -> Bool {
         guard let op = options.filter({ (o) -> Bool in
             return o.name == title
-        }).first else { return  }
+        }).first else { return false}
         op.handle?(value)
+        return true
     }
 }
 
